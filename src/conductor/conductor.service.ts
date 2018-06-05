@@ -13,4 +13,9 @@ export class ConductorService {
     listarConductores(): Conductor[]{
         return this.arregloConductores;
     }
+
+    obtenerConductor(id: number): Conductor{
+        const indice = this.arregloConductores.findIndex((conductorObjeto) => conductorObjeto.id === id);
+        return this.arregloConductores[indice];
+    }
 }
