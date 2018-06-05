@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@nestjs/common';
+import { Component, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Conductor } from './conductor.class';
 
 @Injectable()
@@ -16,6 +16,13 @@ export class ConductorService {
 
     obtenerConductor(id: number): Conductor{
         const indice = this.arregloConductores.findIndex((conductorObjeto) => conductorObjeto.id === id);
+        if (indice === -1){
+          throw new HttpException({
+            status: HttpStatus.NOT_FOUND,
+            error: 'El conductor no existe',
+          }, 404);
+        }
+        console.log(indice);
         return this.arregloConductores[indice];
     }
 

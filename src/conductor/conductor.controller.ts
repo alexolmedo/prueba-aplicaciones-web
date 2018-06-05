@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param, Put, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, UsePipes, HttpException, HttpStatus } from '@nestjs/common';
 import { Conductor } from './conductor.class';
 import { ConductorService } from './conductor.service';
 import { CONDUCTOR_SCHEMA_INSERT, CONDUCTOR_SCHEMA_UPDATE } from './conductor.schema';

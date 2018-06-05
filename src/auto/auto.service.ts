@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@nestjs/common';
+import { Component, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Auto } from './auto.class';
 
 @Injectable()
@@ -14,13 +14,19 @@ export class AutoService {
         return this.arregloAutos;
     }
 
-    obtenerAuto(chasis: number): Auto{
-        const indice = this.arregloAutos.findIndex((autoObjeto) => autoObjeto.chasis === chasis);
+    obtenerAuto(id: number): Auto{
+        const indice = this.arregloAutos.findIndex((autoObjeto) => autoObjeto.id === id);
+        if (indice === -1){
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                error: 'El auto no existe',
+            }, 404);
+        }
         return this.arregloAutos[indice];
     }
 
     editarAuto(auto: Auto): Auto[]{
-        const indice = this.arregloAutos.findIndex((autoObjeto) => autoObjeto.chasis === auto.chasis);
+        const indice = this.arregloAutos.findIndex((autoObjeto) => autoObjeto.id === auto.id);
         // Remove undefined fields
         Object.keys(auto).forEach(key => auto[key] === undefined ? delete auto[key] : '');
         // Update new values

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param, Put, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, UsePipes, HttpStatus, HttpException } from '@nestjs/common';
 import { Auto } from './auto.class';
 import { AutoService } from './auto.service';
 import { FormatPipe } from 'format.pipe';
