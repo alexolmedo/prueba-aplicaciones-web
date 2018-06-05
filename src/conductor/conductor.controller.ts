@@ -18,6 +18,9 @@ export class ConductorController{
     crearConductor(
         @Body() bodyParams){
             console.log(bodyParams);
+            if (!(this.conductorService.existeConductor(bodyParams.id) === -1)){
+                return 'El conductor ya existe';
+            }
             const conductor = new Conductor(
                 bodyParams.id,
                 bodyParams.nombres,

@@ -10,6 +10,10 @@ export class ConductorService {
         return this.arregloConductores;
     }
 
+    existeConductor(id: number){
+        return this.arregloConductores.findIndex((conductorObjeto) => conductorObjeto.id === id);
+    }
+
     listarConductores(): Conductor[]{
         return this.arregloConductores;
     }

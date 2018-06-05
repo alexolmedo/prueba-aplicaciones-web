@@ -18,6 +18,9 @@ export class AutoController{
     crearAuto(
         @Body() bodyParams){
             console.log(bodyParams);
+            if (!(this.autoService.existeAuto(bodyParams.id) === -1)){
+                return 'El auto ya existe';
+            }
             const auto = new Auto(
                 bodyParams.id,
                 bodyParams.nombreMarca,

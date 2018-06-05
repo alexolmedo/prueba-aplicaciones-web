@@ -10,6 +10,10 @@ export class AutoService {
         return this.arregloAutos;
     }
 
+    existeAuto(id: number){
+        return this.arregloAutos.findIndex((autoObjeto) => autoObjeto.id === id);
+    }
+
     listarAuto(): Auto[]{
         return this.arregloAutos;
     }
