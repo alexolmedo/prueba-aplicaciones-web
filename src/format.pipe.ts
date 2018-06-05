@@ -1,8 +1,8 @@
 import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from '@nestjs/common';
 import * as Joi from 'joi';
-import {PeticionInvalidaException} from '../exceptions/peticion-invalida.exception';
+import { PeticionInvalidaException } from 'exceptions/peticion-invalida.exception';
 @Injectable()
-export class ConductorPipe implements PipeTransform {
+export class FormatPipe implements PipeTransform {
     constructor(private readonly schema) {}
     transform(
         valorEnBrutoDelRequest: any,

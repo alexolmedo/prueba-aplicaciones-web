@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, Param, Put, UsePipes } from '@nestjs/common';
 import { Conductor } from './conductor.class';
 import { ConductorService } from './conductor.service';
-import { ConductorPipe } from './conductor.pipe';
 import { CONDUCTOR_SCHEMA_INSERT, CONDUCTOR_SCHEMA_UPDATE } from './conductor.schema';
+import { FormatPipe } from 'format.pipe';
 
 @Controller('Conductor')
 export class ConductorController{
@@ -14,7 +14,7 @@ export class ConductorController{
     }
 
     @Post('crearConductor')
-    @UsePipes(new ConductorPipe(CONDUCTOR_SCHEMA_INSERT))
+    @UsePipes(new FormatPipe(CONDUCTOR_SCHEMA_INSERT))
     crearConductor(
         @Body() bodyParams){
             console.log(bodyParams);
@@ -34,7 +34,7 @@ export class ConductorController{
     }
 
     @Put('editarConductor/:id')
-    @UsePipes(new ConductorPipe(CONDUCTOR_SCHEMA_UPDATE))
+    @UsePipes(new FormatPipe(CONDUCTOR_SCHEMA_UPDATE))
     editarConductor(
         @Param() parametros,
         @Body() bodyParams) {

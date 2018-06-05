@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Post, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, UsePipes } from '@nestjs/common';
 import { Auto } from './auto.class';
 import { AutoService } from './auto.service';
+import { FormatPipe } from 'format.pipe';
+import { AUTO_SCHEMA_INSERT, AUTO_SCHEMA_UPDATE } from 'auto/auto.schema';
 
 @Controller('Auto')
 export class AutoController{
@@ -12,11 +14,12 @@ export class AutoController{
     }
 
     @Post('crearAuto')
+    @UsePipes(new FormatPipe(AUTO_SCHEMA_INSERT))
     crearAuto(
         @Body() bodyParams){
             console.log(bodyParams);
             const auto = new Auto(
-                bodyParams.chasis,
+                bodyParams.id,
                 bodyParams.nombreMarca,
                 bodyParams.colorUno,
                 bodyParams.colorDos,
@@ -32,6 +35,7 @@ export class AutoController{
     }
 
     @Put('editarAuto/:id')
+    @UsePipes(new FormatPipe(AUTO_SCHEMA_UPDATE))
     editarAuto(
         @Param() parametros,
         @Body() bodyParams) {
