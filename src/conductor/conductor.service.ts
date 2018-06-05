@@ -18,4 +18,13 @@ export class ConductorService {
         const indice = this.arregloConductores.findIndex((conductorObjeto) => conductorObjeto.id === id);
         return this.arregloConductores[indice];
     }
+
+    editarConductor(conductor: Conductor): Conductor[]{
+        const indice = this.arregloConductores.findIndex((conductorObjeto) => conductorObjeto.id === conductor.id);
+        // Remove undefined fields
+        Object.keys(conductor).forEach(key => conductor[key] === undefined ? delete conductor[key] : '');
+        // Update new values
+        Object.assign(this.arregloConductores[indice], conductor);
+        return this.arregloConductores;
+    }
 }

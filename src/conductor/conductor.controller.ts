@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put } from '@nestjs/common';
 import { Conductor } from './conductor.class';
 import { ConductorService } from './conductor.service';
 
@@ -26,8 +26,22 @@ export class ConductorController{
     }
 
     @Get('obtenerConductor/:id')
-    anadirACartelera(@Param() parametros) {
+    obtenerConductor(@Param() parametros) {
         return this.conductorService.obtenerConductor(parametros.id);
+    }
+
+    @Put('editarConductor/:id')
+    editarConductor(
+        @Param() parametros,
+        @Body() bodyParams) {
+            const conductorEdit: Conductor = new Conductor(parametros.id,
+            bodyParams.nombres,
+            bodyParams.apellidos,
+            bodyParams.fechaNacimiento,
+            bodyParams.numeroAutos,
+            bodyParams.licenciaValida);
+            console.log(conductorEdit);
+            return this.conductorService.editarConductor(conductorEdit);
     }
 
 }
